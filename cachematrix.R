@@ -34,7 +34,8 @@
 #[1,]   -2  1.5
 #[2,]    1 -0.5
 
-## makeCacheMatrix is function which creates a matrix with its inverse cached
+## makeCacheMatrix is function takes a matrix as input and creates a vector with list of methods
+## to get the matrix and its cached inverse
 
 makeCacheMatrix <- function(x = matrix()) {
         # set inverse of matrix to null
@@ -60,8 +61,8 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## cacheSolve returns inverse of a matrix(part of input vector) from its cache, if cache is null 
-## inverse is calculated and returned and stored in the matrix cache( part of input vector)
+## cacheSolve returns inverse of a matrix(part of input vector) from the input vector's cache, if cache is null 
+## inverse is calculated and returned and stored in the cache( part of input vector)
 
 cacheSolve <- function(x, ...) {
         # get inverse from output of makeCacheMatrix function 
