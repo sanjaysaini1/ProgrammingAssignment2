@@ -1,7 +1,7 @@
 ## This file contains two functions
 ## 1. makeCacheMatrix: 
 #                       This function takes a matrix and returns a special vector,essentially a list containing 
-#                       following: functions which  work on the input matrix                    
+#                       following functions which work on the input matrix                    
 #                      a) get :return the matrix
 #                      b) set: set a new value to matrix and set old cached inverse value to null
 #                      c) getsolve: returns the cached inverse value of the matrix
@@ -18,7 +18,7 @@
 ##                      Usage: cacheSolve(x,...). If the input matrix is not inversible an error is printed
 ##                       Arguments:
 #                                x  special vector containing get and set functions for a matrix and its cached inverse   
-#                                In addition a set arguments can be given which will be passed to the solve function
+#                                ... In addition a set arguments can be given which will be passed to the solve function
 #                                used for calculation of uncached inverse
 ## Example
 #
@@ -35,7 +35,7 @@
 #[2,]    1 -0.5
 
 ## makeCacheMatrix is function takes a matrix as input and creates a vector with list of methods
-## to get the matrix and its cached inverse
+## to get and set the matrix and its cached inverse
 
 makeCacheMatrix <- function(x = matrix()) {
         # set inverse of matrix to null
