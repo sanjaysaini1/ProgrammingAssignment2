@@ -17,7 +17,9 @@
 #                       using get function and sets it in the cache using setsolve and returns the inverse
 ##                      Usage: cacheSolve(x,...). If the input matrix is not inversible an error is printed
 ##                       Arguments:
-#                        x  special vector containing get and set functions for a matrix and its cached inverse   
+#                                x  special vector containing get and set functions for a matrix and its cached inverse   
+#                                In addition a set arguments can be given which will be passed to the solve function
+#                                used for calculation of uncached inverse
 ## Example
 #
 # >mat<-matrix(1:4,2,2)
@@ -37,7 +39,7 @@
 makeCacheMatrix <- function(x = matrix()) {
         # set inverse of matrix to null
         inv<-NULL 
-        ## set function for setting matrix
+        # set function for setting matrix
         set <- function(y) {
                 #matrix x set to have values of matrix y
                 x <<- y 
@@ -45,13 +47,13 @@ makeCacheMatrix <- function(x = matrix()) {
                 inv<<-NULL
                 
         }
-        ## get function to return the matrix
+        # get function to return the matrix
         get<-function() x
-        ## setsolve function sets the inverse(solve) of the matrix
+        # setsolve function sets the inverse(solve) of the matrix
         setsolve<-function(solve)inv<<-solve
-        ## getsolve function returns the inverse value
+        # getsolve function returns the inverse value
         getsolve<-function()inv
-        ## list containing set and get methods for the matrix and its cached inverse
+        # list containing set and get methods for the matrix and its cached inverse
         list(set=set,get = get,
              setsolve = setsolve,
              getsolve = getsolve)
@@ -61,23 +63,23 @@ makeCacheMatrix <- function(x = matrix()) {
 ## cacheSolve returns inverse of a matrix(part of input vector) from its cache, if cache is null 
 ## inverse is calculated and returned and stored in the matrix cache( part of input vector)
 
-cacheSolve <- function(x,...) {
-        ## get inverse from output of makeCacheMatrix function 
+cacheSolve <- function(x, ...) {
+        # get inverse from output of makeCacheMatrix function 
         inverse <- x$getsolve()
         
-        ## if inverse in not null return the inverse after messaging  getting cached data
+        # if inverse in not null return the inverse after messaging  getting cached data
         if(!is.null(inverse)) {
                 message("getting cached data")
                 return(inverse)
         }
         
         ## this section gets called when inverse is not present in cache
-        ## get the matrix
+        # get the matrix
         data <- x$get()
-        ## call solve function to get inverse of input matrix
+        # call solve function to get inverse of input matrix
         inverse <- solve(data,...)
-        ## set the inverse in x so that it is cached and can be used next time.
+        # set the inverse in x so that it is cached and can be used next time.
         x$setsolve(inverse)
-        ## return inverse
+        # return inverse
         inverse
 }
